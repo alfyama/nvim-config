@@ -16,7 +16,7 @@ local sources = {
     null_ls.builtins.diagnostics.flake8,
 
     --rust
-    null_ls.builtins.formatting.rustfmt,
+    --null_ls.builtins.formatting.rustfmt,
 
     --latex
     null_ls.builtins.formatting.latexindent,

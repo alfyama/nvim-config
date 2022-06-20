@@ -31,20 +31,95 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver','clangd','cmake' }
+local servers = { 'pyright', 'tsserver','clangd','cmake' }
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+local lspconfig = require('lspconfig')
 
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
+  lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
- 
-    
+     
     flags = {
       -- This will be the default in neovim 0.7+
       debounce_text_changes = 150,
     }
   }
 end
+
+local ropts = {
+  -- rust-tools options
+  tools = {
+    autoSetHints = true,
+    hover_with_actions = true,
+    inlay_hints = {
+      show_parameter_hints = true,
+      parameter_hints_prefix = "",
+      other_hints_prefix = "",
+      },
+    },
+
+  -- all the opts to send to nvim-lspconfig
+  -- these override the defaults set by rust-tools.nvim
+  -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+  -- https://rust-analyzer.github.io/manual.html#features
+  server = {
+    settings = {
+      ["rust-analyzer"] = {
+        assist = {
+          importEnforceGranularity = true,
+          importPrefix = "crate"
+          },
+        cargo = {
+          allFeatures = true
+          },
+        checkOnSave = {
+          -- default: `cargo check`
+          command = "clippy"
+          },
+        },
+        inlayHints = {
+          lifetimeElisionHints = {
+            enable = true,
+            useParameterNames = true
+          },
+        },
+      }
+    },
+}
+require('rust-tools').setup(ropts)
+
+
+--
+-- lspconfig["rust_analyzer"].setup{
+--     on_attach=on_attach,
+--     capabilities=capabilities,
+--     settings={
+--         ["rust-analyzer"] = {
+--             assist = {
+--                 importEnforceGranularity=true,
+--                 importPrefix = "crate",
+--             },  
+--             cargo = {
+--                 allFeatures = true
+--             },
+--             procMacro = {
+--                 enable = true
+--             },
+--             checksOnSave = {
+--                 command="clippy"
+--             },
+--             inlayHints = {
+--                 lifetimeElisionHints= {
+--                     enable = true,
+--                     useParameterNames = true
+--                 },
+--             },
+--         }
+--     }
+-- }
+
+

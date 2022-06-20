@@ -20,8 +20,9 @@ set.termguicolors=true
 set.cursorline=true
 set.hidden=true
 
-set.completeopt=menu,menuone,noselect
+set.completeopt=menuone,noselect,noinsert
 set.mouse=a
-
+set.signcolumn ='yes'
+set.updatetime=300
 
 

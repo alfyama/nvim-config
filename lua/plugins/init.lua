@@ -27,6 +27,9 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
+    use 'simrat39/rust-tools.nvim'
+    use 'onsails/lspkind.nvim'
+    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
     --snippets
     use 'L3MON4D3/LuaSnip'
