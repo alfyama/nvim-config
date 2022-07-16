@@ -1,6 +1,8 @@
 local map = vim.api.nvim_set_keymap
 local opts = {noremap=true, silent=true}
 
+vim.g.maplocalleader = '¡'
+
 vim.g.mapleader= ' '
 map('n','<leader>te',':NvimTreeToggle<CR>',opts)
 
@@ -19,5 +21,9 @@ map('n','<leader>fh',':Telescope help_tags<CR>',opts)
 
 --format 
 map('n','<leader>bf',':lua vim.lsp.buf.formatting()<CR>',opts)
+
+--exit term 
+map('t','<Esc>','<c-\\><c-n>',opts)
+
 
 

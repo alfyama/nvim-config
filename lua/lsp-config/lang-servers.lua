@@ -31,7 +31,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'tsserver','clangd','cmake' }
+local servers = { 'pyright', 'tsserver','clangd','r_language_server'}
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -87,7 +87,11 @@ local ropts = {
             useParameterNames = true
           },
         },
-      }
+      },
+
+    on_attach = on_attach,
+    capabilities = capabilities,
+    
     },
 }
 require('rust-tools').setup(ropts)

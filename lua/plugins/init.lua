@@ -31,6 +31,9 @@ return require('packer').startup(function()
     use 'onsails/lspkind.nvim'
     use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
+    --R    
+    use {'jalvesaq/Nvim-R', branch= 'stable'}
+
     --snippets
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
