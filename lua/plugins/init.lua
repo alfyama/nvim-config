@@ -52,6 +52,7 @@ return require('packer').startup(function()
     end}
     --latex 
     use 'lervag/vimtex'
-
-
+    
+    use 'vimwiki/vimwiki' 
+  
 end)

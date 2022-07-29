@@ -25,4 +25,3 @@ set.mouse=a
 set.signcolumn ='yes'
 set.updatetime=300
 
-
